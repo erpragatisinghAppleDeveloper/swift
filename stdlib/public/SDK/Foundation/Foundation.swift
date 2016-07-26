@@ -1203,7 +1203,7 @@ extension NSArray {
   ///
   /// Discussion: After an immutable array has been initialized in
   /// this way, it cannot be modified.
-  @objc(_swiftInitWithArray_NSArray:)
+  @nonobjc
   public convenience init(array anArray: NSArray) {
     self.init(array: anArray as Array)
   }
@@ -1216,7 +1216,7 @@ extension NSString {
   /// - Returns: An `NSString` object initialized by copying the
   ///   characters from `aString`. The returned object may be different
   ///   from the original receiver.
-  @objc(_swiftInitWithString_NSString:)
+  @nonobjc
   public convenience init(string aString: NSString) {
     self.init(string: aString as String)
   }
@@ -1229,7 +1229,7 @@ extension NSSet {
   /// - Returns: An initialized objects set containing the objects from
   ///   `set`. The returned set might be different than the original
   ///   receiver.
-  @objc(_swiftInitWithSet_NSSet:)
+  @nonobjc
   public convenience init(set anSet: NSSet) {
     self.init(set: anSet as Set)
   }
@@ -1242,7 +1242,7 @@ extension NSDictionary {
   /// - Returns: An initialized dictionary—which might be different
   ///   than the original receiver—containing the keys and values
   ///   found in `otherDictionary`.
-  @objc(_swiftInitWithDictionary_NSDictionary:)
+  @nonobjc
   public convenience init(dictionary otherDictionary: NSDictionary) {
     self.init(dictionary: otherDictionary as Dictionary)
   }
@@ -1342,6 +1342,7 @@ extension NSCoder {
     return NS_Swift_NSCoder_decodeObjectOfClassesForKey(self as AnyObject, classesAsNSObjects, key as AnyObject, nil).map { $0 as Any }
   }
 
+  @nonobjc
   @available(OSX 10.11, iOS 9.0, *)
   public func decodeTopLevelObject() throws -> Any? {
     var error: NSError?
@@ -1355,6 +1356,7 @@ extension NSCoder {
     fatalError("This API has been renamed")
   }
 
+  @nonobjc
   @available(OSX 10.11, iOS 9.0, *)
   public func decodeTopLevelObject(forKey key: String) throws -> AnyObject? {
     var error: NSError?
@@ -1382,11 +1384,13 @@ extension NSCoder {
     return result as? DecodedObjectType
   }
 
+  @nonobjc
   @available(*, unavailable, renamed: "decodeTopLevelObject(of:forKey:)")
   public func decodeTopLevelObjectOfClasses(_ classes: NSSet?, forKey key: String) throws -> AnyObject? {
     fatalError("This API has been renamed")
   }
 
+  @nonobjc
   @available(OSX 10.11, iOS 9.0, *)
   public func decodeTopLevelObject(of classes: [AnyClass]?, forKey key: String) throws -> Any? {
     var error: NSError? = nil
@@ -1412,6 +1416,7 @@ internal func NS_Swift_NSKeyedUnarchiver_unarchiveObjectWithData(
 
 extension NSKeyedUnarchiver {
   @available(OSX 10.11, iOS 9.0, *)
+  @nonobjc
   public class func unarchiveTopLevelObjectWithData(_ data: NSData) throws -> AnyObject? {
     var error: NSError?
     let result = NS_Swift_NSKeyedUnarchiver_unarchiveObjectWithData(self, data as AnyObject, &error)
